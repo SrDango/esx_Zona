@@ -24,10 +24,7 @@ Citizen.CreateThread(function()
 end)
 
 
-function enviaNoti(texto)
-    TriggerClientEvent('esx:showNotification',source,texto)
-end
-
+--Funcion para abrir el menu
 function AbrirMenu()
     local opcis ={
         {label = _U('label1'),value = 'opcion1'},
@@ -44,11 +41,11 @@ function AbrirMenu()
     },function(data,menu)
 
         if data.current.value == 'opcion1' then
-            enviaNoti('hola1')
+            ESX.ShowNotification(_U('ac1'))
         elseif data.current.value == 'opcion2' then
-            enviaNoti('hola2')
+            ESX.ShowNotification(_U('ac2'))
         elseif data.current.value == 'opcion3' then
-            enviaNoti('hola3')
+            ESX.ShowNotification(_U('ac3'))
         end
 
 
@@ -64,25 +61,25 @@ function AbrirMenu()
 end
 
 
-
-
-
+--Evento de entrar en una Zona
 AddEventHandler('esx_Zona:entrando',function(zone)
     if zone == 'Zona1' then
         Accion = 'menuPrincipal'
         Mensaje = _U('mensaje')
         Dato = {}
+    -- ELSEIF zona == otraZona THEN
+    --ACCION/Mensaje/Dato
     end
 
 
 end)
-
+--Evento de salir de la zona
 AddEventHandler('esx_Zona:saliendo',function(zone)
     ESX.UI.Menu.CloseAll()
     Accion = nil
-
 end)
 
+--¿Esta dentro?
 local HasAlreadyEnteredMarker   = false
 local LastZone                  = nil
 Citizen.CreateThread(function()
@@ -130,8 +127,12 @@ Citizen.CreateThread(function()
 
             if IsControlJustPressed(0, Keys['E'])then
                 if Accion == 'menuPrincipal' then
-                AbrirMenu()
+                    AbrirMenu()
+                --ELSE IF Accion == 'OTROMENU' THEN
+                --ABRIR El otro menu
+                
                 end
+
                 Accion = nil
 
         end
